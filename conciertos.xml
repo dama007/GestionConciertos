@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_60" class="java.beans.XMLDecoder">
+ <object class="modelo.ListaConciertos" id="ListaConciertos0">
+  <void property="lista">
+   <void method="add">
+    <object class="modelo.Concierto">
+     <void property="cantante">
+      <string>Brendy</string>
+     </void>
+     <void property="ciudad">
+      <string>Barcelona </string>
+     </void>
+     <void property="recinto">
+      <string>RazzMatazz</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="modelo.Concierto">
+     <void property="cantante">
+      <string>La Quinta Estación </string>
+     </void>
+     <void property="ciudad">
+      <string>Madrid</string>
+     </void>
+     <void property="recinto">
+      <string>Apollo</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

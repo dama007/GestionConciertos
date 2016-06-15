@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_60" class="java.beans.XMLDecoder">
+ <object class="modelo.ListaClientes" id="ListaClientes0">
+  <void property="lista">
+   <void method="add">
+    <null/>
+   </void>
+  </void>
+ </object>
+</java>
