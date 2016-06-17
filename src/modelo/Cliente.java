@@ -1,15 +1,15 @@
 
 package modelo;
 
-import java.io.Serializable;
-import java.util.Objects;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 
 /**
  *
  * @author usu21
  */
-public class Cliente implements Serializable {
-    
+public class Cliente { 
     
     private String nif;    
     private String nombre;    
@@ -18,74 +18,66 @@ public class Cliente implements Serializable {
     
     
     public Cliente() {
-        this.nif = "";
-        this.nombre = "";
-        this.apellidos = "";
-    }
-
-    
-    
-    public Cliente(String nif, String nombre, String apellidos) {
-        this.nif = nif;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+        nif = "";
+        nombre = "";
+        apellidos = "";
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.nif);
-        return hash;
+    public String toString() {
+        return nombre + " - " + apellidos;
     }
+    
+    
+    
+    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.nif, other.nif)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
+    public static final String PROP_APELLIDOS = "apellidos";
 
     public String getApellidos() {
         return apellidos;
     }
 
     public void setApellidos(String apellidos) {
+        String oldApellidos = this.apellidos;
         this.apellidos = apellidos;
+        propertyChangeSupport.firePropertyChange(PROP_APELLIDOS, oldApellidos, apellidos);
     }
 
+
+    public static final String PROP_NOMBRE = "nombre";
 
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
+        String oldNombre = this.nombre;
         this.nombre = nombre;
+        propertyChangeSupport.firePropertyChange(PROP_NOMBRE, oldNombre, nombre);
     }
 
+
+    public static final String PROP_NIF = "nif";
 
     public String getNif() {
         return nif;
     }
 
     public void setNif(String nif) {
+        String oldNif = this.nif;
         this.nif = nif;
+        propertyChangeSupport.firePropertyChange(PROP_NIF, oldNif, nif);
     }
 
-    
+    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
 }
