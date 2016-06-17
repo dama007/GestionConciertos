@@ -1,7 +1,11 @@
 
 package vista;
 
-import gestionentradas.BcnSummerMusic;
+
+import dao.MusicaDAO;
+import excepciones.MiExcepcion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 
@@ -106,7 +110,7 @@ public class AltaCliente extends javax.swing.JDialog {
                                 .addContainerGap())))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap())))
         );
@@ -125,7 +129,7 @@ public class AltaCliente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -138,22 +142,13 @@ public class AltaCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.equals(null)) {
-            JOptionPane.showMessageDialog(this, "Introduce un nif, por favor.");
-        } else if (jTextField1.getText().length() != 9) {
-            JOptionPane.showMessageDialog(this, "El nif tiene que tener 9 digitos.");
-        } else if (jTextField2.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Introduce el nombre, por favor.");
-        } else if (jTextField3.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Introduce un apellido, por favor.");
-        } else if (BcnSummerMusic.misClientes.existeCliente(nuevoCliente)) {
-            JOptionPane.showMessageDialog(this, "Este cliente ya existe.");
-        } else {
-            BcnSummerMusic.misClientes.altaCliente(nuevoCliente);
-            BcnSummerMusic.ficheroClientes.grabar(BcnSummerMusic.misClientes);
-            JOptionPane.showMessageDialog(this, "Ole!!!! Cliente dado de alta.");
-            dispose();
-            
+        if (validarCampos()) {
+                MusicaDAO musicaDAO = new MusicaDAO();
+                try {
+                musicaDAO.insertarClient(nuevoCliente);
+            } catch (MiExcepcion ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -161,8 +156,24 @@ public class AltaCliente extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
-
+    private boolean validarCampos() {
+    if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()
+            || jTextField3.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor rellene los campos en blanco!");
+        return false;
+    } else if (jTextField1.getText().length() != 9){
+        JOptionPane.showMessageDialog(this, "NIF incorrecto!");
+        return false;
+    } else if (jTextField2.getText().length() > 20) {
+        JOptionPane.showMessageDialog(this, "Nombre demasiado largo.");
+        return false;
+    } else if (jTextField3.getText().length() > 40) {
+        JOptionPane.showMessageDialog(this, "Apellidos demasiado largos.");
+        return false;
+    }
+    return true;
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
