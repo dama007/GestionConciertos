@@ -76,6 +76,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setPreferredSize(new java.awt.Dimension(150, 19));
 
         jMenuItem3.setText("Listado de Conciertos con entradas disponibles");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuItem4.setText("Listado de Entradas");
@@ -124,10 +129,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        VentaEntradas ve = new VentaEntradas(this, true);
+        VentaEntrada ve = new VentaEntrada(this, true);
         ve.setLocationRelativeTo(null);
         ve.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
    
 

@@ -4,8 +4,6 @@ package vista;
 
 import dao.MusicaDAO;
 import excepciones.MiExcepcion;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 
@@ -15,14 +13,14 @@ import modelo.Cliente;
  */
 public class AltaCliente extends javax.swing.JDialog {
     
-    private Cliente nuevoCliente;
+    private Cliente cliente;
 
     public Cliente getNuevoCliente() {
-        return nuevoCliente;
+        return cliente;
     }
 
     public void setNuevoCliente(Cliente nuevoCliente) {
-        this.nuevoCliente = nuevoCliente;
+        this.cliente = nuevoCliente;
     }
 
 
@@ -31,7 +29,7 @@ public class AltaCliente extends javax.swing.JDialog {
      */
     public AltaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        nuevoCliente = new Cliente();
+        cliente = new Cliente();
         initComponents();
     }
 
@@ -145,7 +143,9 @@ public class AltaCliente extends javax.swing.JDialog {
         if (validarCampos()) {
                 MusicaDAO musicaDAO = new MusicaDAO();
                 try {
-                musicaDAO.insertarClient(nuevoCliente);
+                musicaDAO.insertarClient(cliente);
+                JOptionPane.showMessageDialog(this, "Cliente dado de alta.");
+                dispose();
             } catch (MiExcepcion ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }

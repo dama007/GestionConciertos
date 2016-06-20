@@ -1,4 +1,6 @@
-
+/*
+ * Entity for Concert
+ */
 package modelo;
 
 import java.beans.PropertyChangeListener;
@@ -6,62 +8,46 @@ import java.beans.PropertyChangeSupport;
 
 /**
  *
- * @author usu21
+ * @author mfontana
  */
-public class Concierto { 
-    
-    private int id;    
-    private String cantante;    
-    private String sala;    
-    private String ciudad;   
-    private int capacidad;    
-    private double precio;    
-    private int vendido;
+public class Concierto {
+
+    private int id;
+    private String cantante;
+    private String sala;
+    private String ciudad;
+    private int capacidad;
+    private double precio;
+    private int entradas;
 
     public Concierto() {
-        this.cantante = "";
-        this.sala = "";
-        this.ciudad = "";
+        cantante = "";
+        sala = "";
+        ciudad = "";
     }
     
     
+    public int getEntradas() {
+        return entradas;
+    }
 
-    @Override
-    public String toString() {
-        return cantante + " - " + ciudad;
+    public void setEntradas(int entradas) {
+        int oldEntradas = this.entradas;
+        this.entradas = entradas;
+        propertyChangeSupport.firePropertyChange(PROP_ENTRADAS, oldEntradas, entradas);
     }
     
-     
-    
-
-    public static final String PROP_VENDIDO = "vendido";
-
-    public int getVendido() {
-        return vendido;
-    }
-
-    public void setVendido(int vendido) {
-        int oldVendido = this.vendido;
-        this.vendido = vendido;
-        propertyChangeSupport.firePropertyChange(PROP_VENDIDO, oldVendido, vendido);
-    }
-
-
-    public static final String PROP_PRECIO = "precio";
-
     public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(double price) {
         double oldPrecio = this.precio;
         this.precio = precio;
         propertyChangeSupport.firePropertyChange(PROP_PRECIO, oldPrecio, precio);
     }
-
-
-    public static final String PROP_CAPACIDAD = "capacidad";
-
+    
+    
     public int getCapacidad() {
         return capacidad;
     }
@@ -71,10 +57,8 @@ public class Concierto {
         this.capacidad = capacidad;
         propertyChangeSupport.firePropertyChange(PROP_CAPACIDAD, oldCapacidad, capacidad);
     }
-
-
-    public static final String PROP_CIUDAD = "ciudad";
-
+    
+    
     public String getCiudad() {
         return ciudad;
     }
@@ -85,22 +69,18 @@ public class Concierto {
         propertyChangeSupport.firePropertyChange(PROP_CIUDAD, oldCiudad, ciudad);
     }
 
-
-    public static final String PROP_SALA = "sala";
-
     public String getSala() {
         return sala;
     }
 
     public void setSala(String sala) {
-        String oldSala = this.sala;
         this.sala = sala;
-        propertyChangeSupport.firePropertyChange(PROP_SALA, oldSala, sala);
     }
-
-
-    public static final String PROP_CANTANTE = "cantante";
-
+    
+    
+    
+    
+    
     public String getCantante() {
         return cantante;
     }
@@ -110,10 +90,8 @@ public class Concierto {
         this.cantante = cantante;
         propertyChangeSupport.firePropertyChange(PROP_CANTANTE, oldCantante, cantante);
     }
-
-
-    public static final String PROP_ID = "id";
-
+    
+    
     public int getId() {
         return id;
     }
@@ -123,6 +101,26 @@ public class Concierto {
         this.id = id;
         propertyChangeSupport.firePropertyChange(PROP_ID, oldId, id);
     }
+    
+   
+    
+    @Override
+    public String toString() {
+        return cantante + " - " + ciudad;
+    }
+    
+    
+    
+
+    public static final String PROP_ENTRADAS = "entradas";
+    public static final String PROP_PRECIO = "precio";
+    public static final String PROP_CAPACIDAD = "capacidad";
+    public static final String PROP_CIUDAD = "ciudad";
+    public static final String PROP_SALA = "sala";
+    public static final String PROP_CANTANTE = "cantante";
+    public static final String PROP_ID = "id";
+
+    
 
     private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
